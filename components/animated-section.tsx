@@ -9,7 +9,7 @@ interface AnimatedSectionProps extends HTMLAttributes<HTMLDivElement> {
   delay?: number
 }
 
-const AnimatedSection = forwardRef<HTMLDivElement, AnimatedSectionProps>(
+export const AnimatedSection = forwardRef<HTMLDivElement, AnimatedSectionProps>(
   ({ className, direction = 'up', delay = 0, children, ...props }, ref) => {
     const [elementRef, isVisible] = useIntersectionObserver()
 
@@ -41,6 +41,4 @@ const AnimatedSection = forwardRef<HTMLDivElement, AnimatedSectionProps>(
   }
 )
 AnimatedSection.displayName = "AnimatedSection"
-
-export default AnimatedSection
 

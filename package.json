@@ -9,14 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "lucide-react": "^0.469.0",
+    "lucide-react": "latest",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest"
   },
   "devDependencies": {
-    "@types/node": "latest",
-    "@types/react": "latest",
+    "@types/node": "^22.10.3",
+    "@types/react": "^19.0.2",
     "eslint": "latest",
     "eslint-config-next": "latest",
     "typescript": "latest"

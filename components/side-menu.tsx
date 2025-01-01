@@ -2,9 +2,8 @@
 
 import { ArrowUp, Phone, MessageCircle, QrCode } from 'lucide-react'
 import { useState } from 'react'
-import Image from 'next/image'
 
-export default function SideMenu() {
+export function SideMenu() {
   const [showQR, setShowQR] = useState(false)
 
   const scrollToTop = () => {
@@ -41,11 +40,9 @@ export default function SideMenu() {
         </button>
         {showQR && (
           <div className="absolute bottom-0 right-full mr-2 bg-white p-2 rounded-lg shadow-lg">
-            <Image
-              src="/images/qrcode.jpg"
-              alt="微信二维码"
-              width={128}
-              height={128}
+            <img
+              src="/placeholder.svg"
+              alt="QR Code"
               className="w-32 h-32"
             />
           </div>
