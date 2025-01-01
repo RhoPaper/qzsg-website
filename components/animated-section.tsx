@@ -42,5 +42,6 @@ const AnimatedSection = forwardRef<HTMLDivElement, AnimatedSectionProps>(
 )
 AnimatedSection.displayName = "AnimatedSection"
 
+export { AnimatedSection }
 export default AnimatedSection
 
