@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css');
+
+:where([class^="ri-"])::before { content: "\f3c2"; }
+
+body {
+  font-family: 'Noto Sans SC', sans-serif;
+}
+
+.section-title {
+  position: relative;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background-color: #F5A623;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+:root {
+  --primary: #0B8B9B;
+  --secondary: #F5A623;
+}
