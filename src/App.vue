@@ -9,6 +9,11 @@
 <script setup>
 import NavBar from './components/NavBar.vue';
 import FooterSection from './components/FooterSection.vue';
+import Clarity from '@microsoft/clarity';
+
+// 加载 Microsoft Clarity 组件
+const projectId = "r6t8kssmg9"
+Clarity.init(projectId);
 </script>
 
 <style>
