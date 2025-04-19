@@ -4,8 +4,8 @@
     <div class="container hero-content">
       <div class="hero-text-container">
         <div class="hero-text-box slide-in-left">
-          <h1 class="hero-title">一切为了孩子，为了孩子的一切</h1>
-          <p class="hero-subtitle">All for children, For all children</p>
+          <h1 class="hero-title">一切为了孩子，为了孩子的一切。</h1>
+          <p class="hero-subtitle">All for children, For all children.</p>
         </div>
         <div class="hero-buttons slide-in-left" style="animation-delay: 0.3s;">
           <router-link to="/about" class="btn btn-primary">了解更多</router-link>
@@ -33,7 +33,7 @@
 <style scoped>
 .hero-section {
   position: relative;
-  background-image: url('https://public.readdy.ai/ai/img_res/fd432472d176f555759df9ade608af7d.jpg');
+  background-image: url('../assets/static/image/cover.jpeg');
   background-size: cover;
   background-position: center;
   overflow: hidden;

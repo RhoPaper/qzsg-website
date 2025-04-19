@@ -7,18 +7,20 @@
             <h2 class="profile-title">机构简介 / School Profile</h2>
           </div>
           <p class="profile-text fade-in-right" ref="text1">
-            亲子拾光成立于2010年，是一家专注于3-12岁儿童综合素质培养的教育机构。十余年来，我们始终秉持"一切为了孩子，为了孩子的一切"的教育理念，致力于为孩子提供全面、科学、个性化的教育服务。
+            拾光研学旅行社隶属于梓萌教育，旗下两个品牌：亲子拾光和拾光少年，分别经营亲子研学和儿童独立研学业务。我们拥有包括旅行社、营地教育、户外机构、研学旅行等国家承认的正规资质，是国内组织儿童相关活动资质、经验、专业性和安全保障最齐全的公司之一。
           </p>
-          <p class="profile-text fade-in-right" ref="text2" style="transition-delay: 0.2s;">
-            我们拥有一支专业的教师团队，他们不仅具备扎实的专业知识，还拥有丰富的教学经验和对儿童心理的深刻理解。我们的课程体系涵盖语言表达、逻辑思维、艺术创造、体能发展等多个领域，旨在培养孩子的综合素质和核心竞争力。
-          </p>
-          <p class="profile-text fade-in-right" ref="text3" style="transition-delay: 0.4s;">
-            目前，我们在全国已有30多家分校，服务学员超过10万人次，得到了家长和社会的广泛认可。我们将继续秉持初心，不断创新教育方法，为每一个孩子的成长保驾护航。
-          </p>
+          <div class="popbar">
+            <p class="profile-text fade-in-right" ref="text2" style="transition-delay: 0.2s;">
+              十年专注于儿童户外教育体验活动。
+            </p>
+            <p class="profile-text fade-in-right" ref="text3" style="transition-delay: 0.4s;">
+              10 years to focus on outdoor training courses.
+            </p>
+          </div>
         </div>
         <div class="profile-image-container" ref="profileImage">
           <div class="profile-image-wrapper">
-            <img src="https://public.readdy.ai/ai/img_res/503b9ecb8945af81f9414d3d3b9fce6b.jpg" alt="教育理念" class="profile-image">
+            <img src="../assets/static/image/profile-img.jpg" alt="教育理念" class="profile-image">
           </div>
         </div>
       </div>

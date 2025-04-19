@@ -8,7 +8,8 @@
       <div class="team-container">
         <!-- Logo放在旋转容器外部，这样就不会跟着旋转 -->
         <div class="team-logo" >
-          <span class="team-logo-text">亲子拾光</span>
+          <img class="team-logo-img" src="../assets/static/image/qzsg-logo.svg">
+          <!-- <span class="team-logo-text">亲子拾光</span> -->
         </div>
         
         <div class="team-orbit-container" ref="orbitContainer">
@@ -41,6 +42,7 @@
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
+
 
 const teachers = [
   {
@@ -84,20 +86,29 @@ const teachers = [
 const orbitContainer = ref(null);
 const activeTeacher = ref(null);
 const hideTimer = ref(null);
+const baseRadius = ref(180);
+
+const handleResize = () => {
+  // 根据屏幕宽度动态调整轨道半径
+  baseRadius.value = Math.min(window.innerWidth * 0.35, 180);
+};
 
 // 计算每个教师头像的轨道样式
 const getOrbitStyle = (index) => {
   const angle = (index / teachers.length) * 2 * Math.PI;
-  const radius = 180; // 轨道半径
-  const x = Math.cos(angle) * radius;
-  const y = Math.sin(angle) * radius;
+  const x = Math.cos(angle) * baseRadius.value;
+  const y = Math.sin(angle) * baseRadius.value;
   
   return {
     '--orbit-x': `${x}px`,
     '--orbit-y': `${y}px`,
+    '--base-x': x,
+    '--base-y': y,
     '--orbit-delay': `${index * 0.5}s`
   };
 };
+
+
 
 // 显示教师详情
 const showTeacherDetails = (index) => {
@@ -115,9 +126,8 @@ const showTeacherDetails = (index) => {
   }
 };
 
-// 隐藏教师详情并设置定时器
+// 隐藏教师详情
 const hideTeacherDetails = () => {
-  // 设置定时器，10秒后隐藏详情并恢复旋转
   hideTimer.value = setTimeout(() => {
     activeTeacher.value = null;
     
@@ -132,6 +142,9 @@ const hideTeacherDetails = () => {
 
 // 组件挂载时启动动画
 onMounted(() => {
+  
+  handleResize(); // 初始化计算
+  window.addEventListener('resize', handleResize);
   // 确保轨道容器开始旋转
   if (orbitContainer.value) {
     orbitContainer.value.style.animationPlayState = 'running';
@@ -140,6 +153,7 @@ onMounted(() => {
 
 // 组件卸载前清除定时器
 onBeforeUnmount(() => {
+  window.removeEventListener('resize', handleResize);
   if (hideTimer.value) {
     clearTimeout(hideTimer.value);
   }
@@ -205,12 +219,11 @@ onBeforeUnmount(() => {
   width: 8rem;
   height: 8rem;
   border-radius: 9999px;
-  background-color: var(--red-500);
+  background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 30; /* 确保logo在最上层 */
-  box-shadow: 0 0 30px rgba(239, 68, 68, 0.5);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
   animation: pulse 3s infinite alternate;
 }
 
@@ -225,10 +238,10 @@ onBeforeUnmount(() => {
   }
 }
 
-.team-logo-text {
-  font-family: 'Pacifico', cursive;
-  color: var(--white);
-  font-size: 1.5rem;
+.team-logo-img {
+    width: 60%;
+    height: 60%;
+    object-fit: fill;
 }
 
 .teacher-orbit-item {
@@ -259,18 +272,26 @@ onBeforeUnmount(() => {
 .teacher-avatar-container {
   width: 5rem;
   height: 5rem;
-  border-radius: 9999px;
+  border-radius: 50%;
+  transition: 
+    width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-radius 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-color 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
   overflow: hidden;
   border: 3px solid var(--red-500);
   transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
   cursor: pointer;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transform: translateZ(0); /* 启用GPU加速 */
+  backface-visibility: hidden; /* 消除边缘锯齿 */
 }
 
 .teacher-orbit-item.active .teacher-avatar-container {
   width: 6rem;
   height: 6rem;
-  border-radius: 1rem;
+  border-radius: 16px;
   border-width: 5px;
   border-color: var(--secondary);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
@@ -302,7 +323,7 @@ onBeforeUnmount(() => {
   opacity: 0;
   visibility: hidden;
   transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  z-index: 25; /* 确保详情框在头像上方但在logo下方 */
+  z-index: 30; 
   pointer-events: none; /* 默认不接收鼠标事件 */
 }
 
@@ -315,6 +336,7 @@ onBeforeUnmount(() => {
   border-width: 0 10px 10px 10px;
   border-style: solid;
   border-color: transparent transparent var(--white) transparent;
+  z-index: 100;
 }
 
 .teacher-details.show {
