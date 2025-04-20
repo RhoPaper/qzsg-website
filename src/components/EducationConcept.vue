@@ -2,14 +2,26 @@
   <section class="education-concept">
     <div class="container">
       <div class="concept-container">
-        <div class="concept-image-container" ref="imageContainer">
-          <div class="concept-image-wrapper">
-            <img src="https://public.readdy.ai/ai/img_res/e2042ec62a2aae777e74bd8f274cc8a5.jpg" alt="教育活动" class="concept-image">
+        <div class="concept-image-container" ref="imageContainer"
+              @mouseenter="pauseAutoPlay" @mouseleave="resumeAutoPlay">
+          <RouterLink 
+            v-for="(image, index) in conceptImages" 
+            :key="index"
+            :to="{ path: '/courses' }"
+            class="concept-image-wrapper"
+            :class="{ 'active': currentIndex === index }"
+          >
+            <img 
+              :src="image.url" 
+              :alt="image.title" 
+              class="concept-image"
+            >
             <div class="concept-image-overlay">
-              <h3 class="concept-image-title">美杜莎行动</h3>
+              <h3 class="concept-image-title">{{ image.title }}</h3>
             </div>
-          </div>
+          </RouterLink>
         </div>
+        
         <div class="concept-content" ref="contentContainer">
           <div class="concept-title-container">
             <h2 class="section-title">教育理念 / Concept</h2>
@@ -51,13 +63,43 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { RouterLink } from 'vue-router';
 
 const imageContainer = ref(null);
 const contentContainer = ref(null);
 const text1 = ref(null);
 const text2 = ref(null);
 const featuresContainer = ref(null);
+
+const conceptImages = ref([
+  {
+    url: require('../assets/static/image/concept-img1.jpg'),
+    title: '美杜莎行动'
+  },
+  {
+    url: require('../assets/static/image/concept-img2.jpg'), // 添加更多图片
+    title: '海上丝路'
+  },
+]);
+
+const currentIndex = ref(0);
+let autoPlayTimer = null;
+
+// 自动轮播逻辑
+const startAutoPlay = () => {
+  autoPlayTimer = setInterval(() => {
+    currentIndex.value = (currentIndex.value + 1) % conceptImages.value.length;
+  }, 3000);
+};
+
+const pauseAutoPlay = () => {
+  clearInterval(autoPlayTimer);
+};
+
+const resumeAutoPlay = () => {
+  startAutoPlay();
+};
 
 onMounted(() => {
   // 添加滚动监听，实现滚动触发动画
@@ -76,6 +118,10 @@ onMounted(() => {
   if (text1.value) observer.observe(text1.value);
   if (text2.value) observer.observe(text2.value);
   if (featuresContainer.value) observer.observe(featuresContainer.value);
+});
+
+onBeforeUnmount(() => {
+  clearInterval(autoPlayTimer);
 });
 </script>
 
@@ -98,16 +144,11 @@ onMounted(() => {
   }
 }
 
+/* 新增轮播相关样式 */
 .concept-image-container {
+  position: relative;
   width: 100%;
-  opacity: 0;
-  transform: translateX(-50px);
-  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.concept-image-container.animate {
-  opacity: 1;
-  transform: translateX(0);
+  height: 20rem; /* 固定高度 */
 }
 
 @media (min-width: 768px) {
@@ -117,29 +158,30 @@ onMounted(() => {
 }
 
 .concept-image-wrapper {
-  position: relative;
-  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
   border-radius: 0.5rem;
-  height: 20rem;
+  overflow: hidden;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  transition: all 0.5s;
 }
 
-.concept-image-wrapper:hover {
-  transform: scale(1.02) rotate(1deg);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+.concept-image-wrapper.active {
+  opacity: 1;
+  z-index: 1;
 }
 
 .concept-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top;
-  transition: all 8s ease-in-out;
+  transition: transform 8s ease-in-out;
 }
 
 .concept-image-wrapper:hover .concept-image {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .concept-image-overlay {
@@ -149,7 +191,8 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.5s;
+  transition: all 0.3s;
+  cursor: pointer;
 }
 
 .concept-image-wrapper:hover .concept-image-overlay {
@@ -165,7 +208,8 @@ onMounted(() => {
   transition: all 0.5s 0.2s;
 }
 
-.concept-image-container.animate .concept-image-title {
+.concept-image-container.animate .concept-image-title,
+.concept-image-wrapper.active .concept-image-title {
   transform: translateY(0);
   opacity: 1;
 }
