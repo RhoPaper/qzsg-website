@@ -2,7 +2,14 @@
   <header class="header">
     <div class="container header-container">
       <div class="header-left">
-        <router-link to="/" class="logo">亲子拾光</router-link>
+        <router-link to="/" class="logo">
+          <img 
+          src="../assets/static/image/qzsg.png"
+          width="180" 
+          height="60"
+          alt="亲子拾光"
+          >
+        </router-link>
         <nav class="desktop-nav">
           <router-link to="/" class="nav-link">首页</router-link>
           <router-link to="/about" class="nav-link">机构介绍</router-link>
@@ -89,28 +96,50 @@ const closeMobileMenu = () => {
 }
 
 .logo {
-  font-family: 'Pacifico', cursive;
-  font-size: 1.5rem;
+  display: inline-block;
+  width: clamp(120px, 15vw, 180px); /* 自适应宽度 */
+  height: clamp(40px, 5vw, 60px);   /* 自适应高度 */
   margin-right: 2.5rem;
-  color: var(--white);
   position: relative;
-  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
 }
 
-.logo::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
+.logo img {
   width: 100%;
-  height: 2px;
-  background-color: var(--secondary);
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
+  height: 100%;
+  object-fit: contain; /* 确保图片完整显示 */
+  filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.1));
+  transition: inherit;
 }
 
-.logo:hover::after {
-  transform: translateX(0);
+/* 桌面端悬停效果 */
+@media (hover: hover) {
+  .logo:hover {
+    transform: scale(1.05);
+  }
+  
+  .logo:hover img {
+    opacity: 0.9;
+    filter: drop-shadow(0 4px 8px rgba(255, 255, 255, 0.2));
+  }
+}
+
+/* 移动端点击反馈 */
+@media (hover: none) {
+  .logo:active {
+    transform: scale(0.98);
+    transition-duration: 0.1s;
+  }
+}
+
+/* 移动端小屏幕适配 */
+@media (max-width: 768px) {
+  .logo {
+    margin-right: 1.5rem;
+    width: clamp(100px, 20vw, 120px);
+    height: clamp(30px, 6vw, 40px);
+  }
 }
 
 .desktop-nav {
