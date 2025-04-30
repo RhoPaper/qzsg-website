@@ -4,10 +4,10 @@
       <div class="header-left">
         <router-link to="/" class="logo">
           <img 
-          src="../assets/static/image/qzsg.png"
-          width="180" 
-          height="60"
-          alt="亲子拾光"
+            src="../assets/static/image/qzsg.png"
+            width="180" 
+            height="60"
+            alt="亲子拾光"
           >
         </router-link>
         <nav class="desktop-nav">
@@ -20,15 +20,25 @@
         </nav>
       </div>
       <div class="header-right">
-        <div class="phone-container">
-          <div class="phone-icon">
-            <i class="ri-phone-line"></i>
+        <a href="tel:17706497762" v-if="!isMobile">
+          <div class="phone-container">
+            <div class="phone-icon">
+              <i class="ri-phone-line"></i>
+            </div>
+            <span>177 0649 7762</span>
           </div>
-          <span>400-888-9999</span>
-        </div>
-        <button class="wechat-button">
-          <i class="ri-wechat-line"></i>
+        </a>
+        
+        <a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzIwOTQ1NzkxNw==" target="_blank">
+          <button class="wechat-button" v-if="!isMobile">
+            <i class="ri-wechat-line"></i>
+          </button>
+        </a>
+        <a href="tel:17706497762">
+          <button class="mobile-icon-button" v-if="isMobile">
+              <i class="ri-phone-line"></i> <!-- 替换为移动端需要显示的图标 -->
         </button>
+      </a>
         <button @click="toggleMobileMenu" class="menu-button" :class="{ 'is-active': mobileMenuOpen }">
           <span class="menu-bar"></span>
           <span class="menu-bar"></span>
@@ -53,14 +63,13 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 const mobileMenuOpen = ref(false);
+const isMobile = ref(false); // 新增响应式变量
 
 const toggleMobileMenu = () => {
   mobileMenuOpen.value = !mobileMenuOpen.value;
-  
-  // 当菜单打开时，禁止背景滚动
   if (mobileMenuOpen.value) {
     document.body.style.overflow = 'hidden';
   } else {
@@ -72,6 +81,22 @@ const closeMobileMenu = () => {
   mobileMenuOpen.value = false;
   document.body.style.overflow = '';
 };
+
+// 检测屏幕宽度并更新isMobile
+const checkScreenSize = () => {
+  isMobile.value = window.innerWidth < 768;
+};
+
+// 挂载时检测屏幕宽度
+onMounted(() => {
+  checkScreenSize();
+  window.addEventListener('resize', checkScreenSize);
+});
+
+// 组件销毁前移除事件监听
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', checkScreenSize);
+});
 </script>
 
 <style scoped>
@@ -86,8 +111,8 @@ const closeMobileMenu = () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .header-left {
@@ -208,7 +233,7 @@ const closeMobileMenu = () => {
   margin-right: 0.5rem;
 }
 
-.wechat-button {
+.wechat-button, .mobile-icon-button {
   width: 2rem;
   height: 2rem;
   background-color: var(--secondary);
@@ -221,7 +246,7 @@ const closeMobileMenu = () => {
 }
 
 .wechat-button:hover {
-  transform: scale(1.1) rotate(15deg);
+  transform: scale(1.2) rotate(-12.5deg);
   box-shadow: 0 0 10px rgba(245, 166, 35, 0.5);
 }
 

@@ -117,7 +117,6 @@ const showTeacherDetails = (index) => {
     clearTimeout(hideTimer.value);
     hideTimer.value = null;
   }
-  
   activeTeacher.value = index;
   
   // 暂停旋转动画
@@ -164,7 +163,7 @@ onBeforeUnmount(() => {
 .teacher-team {
   padding: 4rem 0;
   background-color: var(--white);
-  overflow: hidden;
+  overflow: visible;
 }
 
 .team-title-container {
@@ -189,7 +188,7 @@ onBeforeUnmount(() => {
 
 .team-container {
   position: relative;
-  max-width: 56rem;
+  max-width: 500px;
   margin: 0 auto;
   height: 500px;
 }

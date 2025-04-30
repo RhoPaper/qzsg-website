@@ -1,15 +1,21 @@
 <template>
+  <WechatButton />
+  <SideButton />
   <div class="app-container">
     <NavBar />
     <router-view />
     <FooterSection />
   </div>
+  <PrintInfo />
 </template>
 
 <script setup>
 import NavBar from './components/NavBar.vue';
 import FooterSection from './components/FooterSection.vue';
 import Clarity from '@microsoft/clarity';
+import WechatButton from './components/PopWechatButton.vue';
+import SideButton from './components/SideButton.vue';
+import PrintInfo from './components/PrintInfo.vue';
 
 // 加载 Microsoft Clarity 组件
 const projectId = "r6t8kssmg9"
@@ -18,7 +24,7 @@ Clarity.init(projectId);
 
 <style>
 /* 全局样式 */
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&display=swap');
 @import url('https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css');
 
 :where([class^="ri-"])::before { content: "\f3c2"; }

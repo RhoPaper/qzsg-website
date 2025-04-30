@@ -10,12 +10,14 @@
             拾光研学旅行社隶属于梓萌教育，旗下两个品牌：亲子拾光和拾光少年，分别经营亲子研学和儿童独立研学业务。我们拥有包括旅行社、营地教育、户外机构、研学旅行等国家承认的正规资质，是国内组织儿童相关活动资质、经验、专业性和安全保障最齐全的公司之一。
           </p>
           <div class="popbar">
-            <p class="profile-text fade-in-right" ref="text2" style="transition-delay: 0.2s;">
-              十年专注于儿童户外教育体验活动。
-            </p>
-            <p class="profile-text fade-in-right" ref="text3" style="transition-delay: 0.4s;">
-              10 years to focus on outdoor training courses.
-            </p>
+            <div class="in-popbar">
+              <p class="profile-text fade-in-right" ref="text2" style="transition-delay: 0.2s;">
+                十年专注于儿童户外教育体验活动。
+              </p>
+              <p class="profile-text fade-in-right" ref="text3" style="transition-delay: 0.4s;">
+                10 years to focus on outdoor training courses.
+              </p>
+            </div>
           </div>
         </div>
         <div class="profile-image-container" ref="profileImage">
@@ -188,6 +190,16 @@ onMounted(() => {
   }
 }
 
+/* 气泡框效果实现 */
+.popbar{
+  position: relative;
+  width: 95%;
+  height: 125px;
+  background-color: #FFBB41;
+  border: 2px solid #FFBB41;
+  border-radius: 10px ;
+}
+
 /* 从右侧淡入动画 */
 @keyframes fadeInRight {
   from {
@@ -200,6 +212,16 @@ onMounted(() => {
   }
 }
 
+.in-popbar {
+  position: absolute;
+  top: 20px;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
+}
+
 .fade-in-right {
   opacity: 0;
 }
@@ -207,4 +229,5 @@ onMounted(() => {
 .fade-in-right.animate {
   animation: fadeInRight 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
+
 </style>

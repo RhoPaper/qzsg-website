@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微信JS-SDK跳转公众号页面</title>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+</head>
+<body>
+    <h1>点击按钮跳转到公众号页面</h1>
+    <button id="goToWechat">跳转到公众号</button>
+
+    <script>
+        // 微信JS-SDK配置
+        wx.config({
+            debug: false,
+            appId: 'wxd85331d72c7c30b7', // 替换为你的AppID
+            timestamp: '时间戳', // 替换为后端生成的时间戳
+            nonceStr: '随机串', // 替换为后端生成的随机串
+            signature: '签名', // 替换为后端生成的签名
+            jsApiList: ['openLocation', 'getLocation', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo']
+        });
+
+        // 微信JS-SDK配置成功后
+        wx.ready(function() {
+            document.getElementById('goToWechat').onclick = function() {
+                // 跳转到公众号主页
+                window.location.href = 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=Mzg2OTkzMTc5OQ==';
+            };
+        });
+
+        // 错误处理
+        wx.error(function(res) {
+            console.error('微信JS-SDK配置失败:', res);
+        });
+    </script>
+</body>
+</html>

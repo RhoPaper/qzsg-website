@@ -13,24 +13,11 @@
         </div>
       </div>
     </div>
-    <div class="hero-side-buttons">
-      <button class="side-button pop-in" style="animation-delay: 0.4s;">
-        <i class="ri-arrow-down-line"></i>
-      </button>
-      <button class="side-button pop-in" style="animation-delay: 0.5s;">
-        <i class="ri-search-line"></i>
-      </button>
-      <button class="side-button pop-in" style="animation-delay: 0.6s;">
-        <i class="ri-question-line"></i>
-      </button>
-      <button class="side-button pop-in" style="animation-delay: 0.7s;">
-        <i class="ri-refresh-line"></i>
-      </button>
-    </div>
   </section>
 </template>
 
 <style scoped>
+@import url('https://cn.windfonts.com/wenfeng/fonts/almmsht/bold/web/index.css');
 .hero-section {
   position: relative;
   background-image: url('../assets/static/image/cover.jpeg');
@@ -42,7 +29,7 @@
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .hero-content {
