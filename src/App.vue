@@ -17,7 +17,7 @@ import WechatButton from './components/PopWechatButton.vue';
 import SideButton from './components/SideButton.vue';
 import PrintInfo from './components/PrintInfo.vue';
 
-// 加载 Microsoft Clarity 组件
+// 加载 Microsoft Clarity 分析组件
 const projectId = "r6t8kssmg9"
 Clarity.init(projectId);
 </script>
