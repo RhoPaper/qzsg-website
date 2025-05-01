@@ -74,11 +74,11 @@ const featuresContainer = ref(null);
 
 const conceptImages = ref([
   {
-    url: require('../assets/static/image/concept-img1.jpg'),
+    url: require('../assets/static/image/concept-img1.avif'),
     title: '美杜莎行动'
   },
   {
-    url: require('../assets/static/image/concept-img2.jpg'), // 添加更多图片
+    url: require('../assets/static/image/concept-img2.avif'), // 添加更多图片
     title: '海上丝路'
   },
 ]);

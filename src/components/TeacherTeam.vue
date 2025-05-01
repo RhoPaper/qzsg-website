@@ -8,7 +8,7 @@
       <div class="team-container">
         <!-- Logo放在旋转容器外部，这样就不会跟着旋转 -->
         <div class="team-logo" >
-          <img class="team-logo-img" src="../assets/static/image/qzsg-logo.svg">
+          <img class="team-logo-img" src="../assets/static/image/qzsg-logo.avif">
           <!-- <span class="team-logo-text">亲子拾光</span> -->
         </div>
         

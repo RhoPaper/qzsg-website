@@ -4,7 +4,7 @@
       <div class="header-left">
         <router-link to="/" class="logo">
           <img 
-            src="../assets/static/image/qzsg.png"
+            src="../assets/static/image/qzsg.avif"
             width="180" 
             height="60"
             alt="亲子拾光"

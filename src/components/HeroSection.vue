@@ -20,7 +20,7 @@
 @import url('https://cn.windfonts.com/wenfeng/fonts/almmsht/bold/web/index.css');
 .hero-section {
   position: relative;
-  background-image: url('../assets/static/image/cover.jpeg');
+  background-image: url('../assets/static/image/cover.avif');
   background-size: cover;
   background-position: center;
   overflow: hidden;

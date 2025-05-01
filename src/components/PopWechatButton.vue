@@ -1,17 +1,21 @@
 <template>
     <div class="follow-wechat">
         <Tick></Tick>
-        <a href="javascript:void(0)" @click="OpenWechat"><p class="link-text">一键关注公众号</p></a>
+        <a href="javascript:void(0)" @click="OpenWechat"><p class="link-text">关注公众号</p></a>
     </div>
 </template>
 
 <script setup>
 import Tick from './icons/IconTick.vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const OpenWechat = () => {
     // 这里实现关注公众号的具体逻辑
     console.log('触发关注公众号操作')
-    window.open("https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzIwOTQ1NzkxNw==")
+    // window.open("https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzIwOTQ1NzkxNw==")
+    router.push('/ltw') // 这里使用vue-router的push方法跳转到指定页面
 }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <WechatButton />
+  <WechatButton v-if="!isHideWechatButton"/>
   <SideButton />
   <div class="app-container">
     <NavBar />
@@ -10,12 +10,18 @@
 </template>
 
 <script setup>
+import { computed } from 'vue';
 import NavBar from './components/NavBar.vue';
 import FooterSection from './components/FooterSection.vue';
 import Clarity from '@microsoft/clarity';
 import WechatButton from './components/PopWechatButton.vue';
 import SideButton from './components/SideButton.vue';
 import PrintInfo from './components/PrintInfo.vue';
+import { useRoute } from 'vue-router'
+
+// 计算属性判断当前路由是否为 /ltw
+const route = useRoute()
+const isHideWechatButton = computed(() => route.path === '/ltw')
 
 // 加载 Microsoft Clarity 分析组件
 const projectId = "r6t8kssmg9"
@@ -24,8 +30,9 @@ Clarity.init(projectId);
 
 <style>
 /* 全局样式 */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&display=swap');
-@import url('https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@500&display=swap'); /* 导入500weight字体 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap'); /* 导入400weight字体 */
+/* @import url('https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css'); */
 
 :where([class^="ri-"])::before { content: "\f3c2"; }
 

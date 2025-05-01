@@ -22,7 +22,7 @@
         </div>
         <div class="profile-image-container" ref="profileImage">
           <div class="profile-image-wrapper">
-            <img src="../assets/static/image/profile-img.jpg" alt="教育理念" class="profile-image">
+            <img src="../assets/static/image/profile-img.avif" alt="教育理念" class="profile-image">
           </div>
         </div>
       </div>
