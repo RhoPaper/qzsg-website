@@ -5,15 +5,24 @@
                 <i class="ri-corner-left-up-line"></i>
             </button>
         </a>
-        <button class="side-button pop-in" style="animation-delay: 0.5s;">
-            <i class="ri-search-line"></i>
-        </button>
-        <button class="side-button pop-in" style="animation-delay: 0.6s;">
-            <i class="ri-question-line"></i>
-        </button>
-        <button class="side-button pop-in" style="animation-delay: 0.7s;">
-            <i class="ri-refresh-line"></i>
-        </button>
+
+        <a href="/about">
+            <button class="side-button pop-in" style="animation-delay: 0.5s;">
+                <i class="ri-search-line"></i>
+            </button>
+        </a>
+
+        <a href="/activities">
+            <button class="side-button pop-in" style="animation-delay: 0.6s;">
+                <i class="ri-question-line"></i>
+            </button>
+        </a>
+
+        <a href="/teachers">
+            <button class="side-button pop-in" style="animation-delay: 0.7s;">
+                <i class="ri-refresh-line"></i>
+            </button>
+        </a>
     </div>
 </template>
 <style scoped>
