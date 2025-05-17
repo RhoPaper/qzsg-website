@@ -12,11 +12,11 @@ const route = useRoute()
 // 消息映射表
 const messageMap = {
     '404': '[warning]目的地通信卫星遭遇太阳风暴，请稍后再试~',
-    '403': '[error]无权访问',
-    '500': '[error]服务器错误',
-    'success': '[success]操作成功',
-    'error': '[error]操作失败',
-    'gotow': '[warning]请前往微信打开链接',
+    '403': '[error]旅行签证审核未通过！',
+    '500': '[error]服务器君变成废物器了……',
+    'success': '[success]操作成功！',
+    'error': '[error]操作失败，请重试！',
+    'gotow': '[warning]请参考教程前往微信打开此链接！',
     // 可以继续添加更多映射
 }
 
