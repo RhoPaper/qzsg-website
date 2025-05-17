@@ -6,6 +6,7 @@ import CoursesPage from '../views/CoursesPage.vue';
 import ActivitiesPage from '../views/ActivitiesPage.vue';
 import ContactPage from '../views/ContactPage.vue';
 import LTW from '../views/LinkToWechatPage.vue';
+import PostPage from '../views/PostPage.vue';
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
     path: '/ltw',
     name: '前往微信公众号',
     component: LTW
+  },
+  {
+    path: '/p/:slug',
+    name: 'Post',
+    component: PostPage
   }
 ];
 

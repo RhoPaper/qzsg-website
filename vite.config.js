@@ -22,12 +22,22 @@ export default defineConfig({
     Components({
       resolvers: [ElementPlusResolver()],
     }),
-    
   ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
+  assetsInclude: ['**/*.md'], // 添加对 .md 文件的支持
+  optimizeDeps: {
+    include: ['marked'] // 预构建 marked 依赖
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        assetFileNames: 'assets/[name][extname]'
+      }
+    }
+  }
 })
 

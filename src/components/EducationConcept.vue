@@ -132,7 +132,7 @@ onMounted(() => {
   }
 }
 
-/* 新增轮播相关样式 */
+/* 轮播相关样式 */
 .concept-image-container {
   position: relative;
   width: 100%;

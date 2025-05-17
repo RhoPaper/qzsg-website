@@ -8,36 +8,37 @@
       <div class="courses-container">
         <div class="featured-course">
           <div class="featured-course-card">
-            <img src="https://public.readdy.ai/ai/img_res/7e19e21e74874d1dbe61a01bc3be6b26.jpg" alt="远方体育训练营" class="featured-course-image">
+            <div class="concept-image-container" ref="imageContainer">
+              <el-carousel :interval="3000" type="" height="20rem" :autoplay="true" indicator-position=""
+                trigger="click" @change="handleCarouselChange">
+                <el-carousel-item v-for="(image, index) in conceptImages" :key="index">
+                  <RouterLink :to="{ path: image.link }" class="concept-image-wrapper">
+                    <img :src="image.url" :alt="image.title" class="concept-image">
+                  </RouterLink>
+                </el-carousel-item>
+              </el-carousel>
+            </div>
             <div class="featured-course-content">
-              <h3 class="featured-course-title">远方体育训练营</h3>
-              <p class="featured-course-description">
-                为期7天的体育训练营，通过专业的体能训练和团队协作活动，培养孩子的体能素质和团队精神。
-              </p>
+              <h3 class="featured-course-title">{{ currentImage.title }}</h3>
+              <p class="featured-course-description">{{ currentImage.description }}</p>
               <div class="featured-course-meta">
-                <span class="course-date">2025-04-01</span>
-                <span class="course-views">浏览: 673次</span>
+                <span class="course-date">{{ formatDate(currentImage.date) }}</span>
+                <router-link :to="{ path: currentImage.link }" class="course-item-link">查看详情</router-link>
               </div>
             </div>
           </div>
-          <div class="featured-course-indicators">
-            <div class="indicator indicator-active"></div>
-            <div class="indicator"></div>
-            <div class="indicator"></div>
-          </div>
         </div>
         <div class="course-list">
-          <div v-for="(course, index) in courses" :key="index" class="course-item">
+          <div v-for="(post, index) in posts.slice(3, 7)" :key="index" class="course-item">
             <div class="course-item-header">
-              <h3 class="course-item-title">{{ course.title }}</h3>
-              <span class="course-item-date">{{ course.date }}</span>
+              <h3 class="course-item-title">{{ post.title }}</h3>
+              <span class="course-item-date">{{ formatDate(post.date) }}</span>
             </div>
             <p class="course-item-description">
-              {{ course.description }}
+              {{ post.excerpt }}
             </p>
             <div class="course-item-footer">
-              <router-link to="/courses" class="course-item-link">查看详情</router-link>
-              <span class="course-item-views">浏览: {{ course.views }}次</span>
+              <router-link :to="`/p/${post.slug}`" class="course-item-link">查看详情</router-link>
             </div>
           </div>
         </div>
@@ -47,38 +48,120 @@
 </template>
 
 <script setup>
-const courses = [
-  {
-    title: '战狼少年特训营',
-    date: '2025-04-03',
-    description: '专为8-12岁男孩设计的特训营，通过军事化管理和挑战性任务，培养孩子的纪律性、勇气和领导力。',
-    views: 542
-  },
-  {
-    title: '小小演说家培训班',
-    date: '2025-04-02',
-    description: '针对5-9岁儿童的口才训练课程，通过有趣的游戏和表演活动，培养孩子的语言表达能力和自信心。',
-    views: 489
-  },
-  {
-    title: '科学探索实验室',
-    date: '2025-03-30',
-    description: '通过有趣的科学实验和项目式学习，激发孩子对科学的兴趣，培养观察、分析和解决问题的能力。',
-    views: 412
-  },
-  {
-    title: '创意美术工作坊',
-    date: '2025-03-28',
-    description: '结合多种艺术形式，如绘画、雕塑、手工等，让孩子在创作中发现美、表达美、创造美。',
-    views: 378
-  },
-  {
-    title: '亲子森林探险营',
-    date: '2025-03-25',
-    description: '周末亲子活动，在专业导师的带领下，家长和孩子一起探索自然，增进亲子关系，培养环保意识。',
-    views: 356
+import { ref, onMounted } from 'vue';
+
+const posts = ref([]);
+const currentImage = ref({});
+const conceptImages = ref([]);
+
+const handleCarouselChange = (index) => {
+  currentImage.value = conceptImages.value[index];
+};
+
+onMounted(async () => {
+  try {
+    const modules = import.meta.glob('@/assets/posts/*.md', {
+      eager: true,
+      query: '?raw',
+      import: 'default'
+    });
+
+    const postFiles = Object.keys(modules);
+    console.log('Found post files:', postFiles);
+
+    const postsData = postFiles.map(filePath => {
+      const text = modules[filePath];
+      const slug = filePath.split('/').pop().replace('.md', '');
+
+      try {
+        const lines = text.split('\n');
+        let frontmatter = '';
+        let content = '';
+        let inFrontmatter = false;
+
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i];
+          if (line.trim() === '---') {
+            if (!inFrontmatter) {
+              inFrontmatter = true;
+              continue;
+            } else {
+              inFrontmatter = false;
+              continue;
+            }
+          }
+
+          if (inFrontmatter) {
+            frontmatter += line + '\n';
+          } else if (!inFrontmatter && line.trim() !== '') {
+            content = lines.slice(i).join('\n');
+            break;
+          }
+        }
+
+        if (frontmatter) {
+          const titleMatch = frontmatter.match(/title:\s*(.*)/);
+          const dateMatch = frontmatter.match(/date:\s*(.*)/);
+          const imageMatch = frontmatter.match(/image:\s*(.*)/);
+
+          if (titleMatch && dateMatch) {
+            return {
+              title: titleMatch[1].trim(),
+              date: dateMatch[1].trim(),
+              excerpt: getExcerpt(content),
+              slug: slug,
+              image: imageMatch ? imageMatch[1].trim() : null
+            };
+          }
+        }
+      } catch (error) {
+        console.error('Error parsing file:', filePath, error);
+      }
+      return null;
+    });
+
+    const validPosts = postsData.filter(post => post !== null);
+    const sortedPosts = validPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    posts.value = sortedPosts;
+
+    // 设置轮播图数据
+    const latestPosts = sortedPosts.slice(0, 2);
+    conceptImages.value = latestPosts.map(post => ({
+      url: post.image || new URL('../assets/static/image/default-post.avif', import.meta.url).href,
+      title: post.title,
+      description: post.excerpt,
+      date: post.date,
+      link: `/p/${post.slug}`
+    }));
+
+    // 设置初始当前图片
+    currentImage.value = conceptImages.value[0];
+  } catch (error) {
+    console.error('Error loading posts:', error);
   }
-];
+});
+
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('zh-CN', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+};
+
+const getExcerpt = (content) => {
+  try {
+    const plainText = content
+      .replace(/[#*`_]/g, '')
+      .replace(/\n/g, ' ')
+      .trim();
+    return plainText.slice(0, 100) + (plainText.length > 100 ? '...' : '');
+  } catch (error) {
+    console.error('Error generating excerpt:', error);
+    return '无法生成摘要';
+  }
+};
 </script>
 
 <style scoped>
@@ -125,7 +208,7 @@ const courses = [
 
 @media (min-width: 768px) {
   .featured-course {
-    width: 40%;
+    width: 60%;
   }
 }
 
@@ -134,59 +217,56 @@ const courses = [
   border-radius: 0.5rem;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   overflow: hidden;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
 }
 
-.featured-course-image {
+.concept-image-container {
   width: 100%;
-  height: 16rem;
+  height: 20rem;
+  overflow: hidden;
+}
+
+.concept-image {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  object-position: top;
+  transition: transform 0.3s ease-in-out;
 }
 
 .featured-course-content {
-  padding: 1rem;
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .featured-course-title {
   font-size: 1.25rem;
   font-weight: bold;
   color: var(--gray-800);
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .featured-course-description {
   font-size: 0.875rem;
   color: var(--gray-600);
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+  line-height: 1.5;
 }
 
 .featured-course-meta {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: auto;
 }
 
-.course-date, .course-views {
+.course-date {
   font-size: 0.75rem;
   color: var(--gray-500);
-}
-
-.featured-course-indicators {
-  display: flex;
-  justify-content: center;
-  margin-top: 1rem;
-}
-
-.indicator {
-  width: 0.75rem;
-  height: 0.75rem;
-  border-radius: 9999px;
-  background-color: var(--gray-300);
-  margin: 0 0.25rem;
-}
-
-.indicator-active {
-  background-color: var(--secondary);
 }
 
 .course-list {
@@ -195,7 +275,7 @@ const courses = [
 
 @media (min-width: 768px) {
   .course-list {
-    width: 60%;
+    width: 40%;
   }
 }
 
@@ -244,14 +324,28 @@ const courses = [
 .course-item-link {
   font-size: 0.875rem;
   color: var(--primary);
+  text-decoration: none;
 }
 
 .course-item-link:hover {
   text-decoration: underline;
 }
 
-.course-item-views {
-  font-size: 0.75rem;
-  color: var(--gray-500);
+/* 轮播图样式优化 */
+:deep(.el-carousel__item) {
+  padding: 0.5rem;
+}
+
+:deep(.el-carousel__item--card) {
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+:deep(.el-carousel__item--card.is-active) {
+  transform: translateX(0) scale(1.1) !important;
+}
+
+:deep(.el-carousel__item--card.is-in-stage) {
+  cursor: pointer;
 }
 </style>

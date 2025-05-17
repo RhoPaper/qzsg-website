@@ -20,7 +20,6 @@ for (const [key, component] of Object.entries(ElementPlusIcon)) {
 
 app.use(router); // 使用Vue-Router路由
 app.use(ElementPlus) // 使用ElementPlus组件库
-app.use(ElementPlusIcon) // 使用ElementPlus图标库
 
 app.mount('#app');
 

@@ -17,6 +17,7 @@ const messageMap = {
     'success': '[success]操作成功！',
     'error': '[error]操作失败，请重试！',
     'gotow': '[warning]请参考教程前往微信打开此链接！',
+    'post404': '[error]找不到你想看的文章，请检查链接！'
     // 可以继续添加更多映射
 }
 

@@ -96,15 +96,16 @@
 
 <script setup>
 import { ref } from 'vue';
-import { ElMessageBox } from 'element-plus';
 
 const message = ref('');
 
 const submitMessage = () => {
   if (message.value.trim()) {
-    ElMessageBox.alert('感谢您的留言，我们会尽快回复！', '提示', {
-      confirmButtonText: '确定',
-      callback: () => {
+    ElMessage({
+      message: '感谢您的留言，您的意见是我们前进的动力！',
+      type: 'success',
+      duration: 4000,
+      onClose: () => {
         message.value = '';
       }
     });

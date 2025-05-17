@@ -12,6 +12,9 @@
     "@element-plus/icons-vue": "^2.3.1",
     "@microsoft/clarity": "^1.0.0",
     "element-plus": "^2.9.10",
+    "github-markdown-css": "^5.8.1",
+    "highlight.js": "^11.11.1",
+    "marked": "^15.0.11",
     "vue": "^3.5.13",
     "vue-router": "^4.0.3"
   },
