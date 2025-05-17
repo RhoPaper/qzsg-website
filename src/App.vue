@@ -93,22 +93,12 @@ button {
   min-height: 100vh;
 }
 
-/* 自定义滚动条 */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
+/* 不使用浏览器滚动条 */
+::-webkit-scrollbar {
+  width: 0 !important;
 }
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 10px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #555;
+::-webkit-scrollbar {
+  width: 0 !important;height: 0;
 }
 
 /* 全局变量 */
