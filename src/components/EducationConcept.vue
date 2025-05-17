@@ -75,34 +75,18 @@ const text2 = ref(null);
 const featuresContainer = ref(null);
 
 // 定义图片路径和对应标题的映射关系
-const imageMap = {
-  '../assets/static/image/concept-img1.avif': '美杜莎行动',
-  '../assets/static/image/concept-img2.avif': '海上丝路',
-  // 如果您有更多图片，请按照 '相对于当前文件的路径': '标题' 的格式在这里添加
-};
+const imageMap = [
+  {
+    url: new URL('../assets/static/image/concept-img1.avif', import.meta.url).href,
+    title: '美杜莎行动'
+  },
+  {
+    url: new URL('../assets/static/image/concept-img2.avif', import.meta.url).href,
+    title: '海上丝路'
+  }
+];
 
-const conceptImages = ref([]);
-
-// 使用 Promise.all 和动态 import 来并行加载图片 URL
-Promise.all(
-  Object.entries(imageMap).map(([imagePath, title]) => {
-    // 使用动态 import() 来加载图片，Vite 会处理并返回 URL
-    return import(/* @vite-ignore */ imagePath)
-      .then(module => ({ // 成功加载
-        url: module.default, // 图片的 URL 通常在 .default 属性
-        title: title
-      }))
-      .catch(error => { // 加载失败
-        console.error(`Error loading image at ${imagePath}:`, error);
-        return null; // 加载失败则返回 null 或一个默认值
-      });
-  })
-).then(results => {
-  // 过滤掉加载失败的图片，并更新 conceptImages 的值
-  conceptImages.value = results.filter(item => item !== null);
-}).catch(error => {
-  console.error("Error during images loading:", error);
-});
+const conceptImages = ref(imageMap);
 
 const handleCarouselChange = (index) => {
   // 可以在这里添加轮播切换时的回调逻辑
