@@ -10,11 +10,11 @@
               <div class="contact-details">
                 <p class="contact-item">
                   <i class="ri-map-pin-line contact-icon"></i>
-                  北京市海淀区中关村南大街5号
+                  浙江省宁波市鄞州区翔云路100号科贸中心东楼2001
                 </p>
                 <p class="contact-item">
                   <i class="ri-phone-line contact-icon"></i>
-                  400-888-9999
+                  177 0649 7762
                 </p>
                 <p class="contact-item">
                   <i class="ri-mail-line contact-icon"></i>

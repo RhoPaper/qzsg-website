@@ -98,7 +98,8 @@ button {
   width: 0 !important;
 }
 ::-webkit-scrollbar {
-  width: 0 !important;height: 0;
+  width: 0 !important;
+  height: 0;
 }
 
 /* 全局变量 */
