@@ -1,0 +1,69 @@
+<template>
+    <div></div>
+</template>
+
+<script setup>
+import { onMounted, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import { ElNotification } from 'element-plus'
+
+const route = useRoute()
+
+// 消息映射表
+const messageMap = {
+    '404': '[warning]未找到页面',
+    '403': '[error]无权访问',
+    '500': '[error]服务器错误',
+    'success': '[success]操作成功',
+    'error': '[error]操作失败',
+    // 可以继续添加更多映射
+}
+
+const showNotification = (msg) => {
+    if (!msg) return
+
+    // 检查是否是预定义的消息代码
+    const mappedMessage = messageMap[msg]
+    if (mappedMessage) {
+        msg = mappedMessage
+    }
+
+    // 解析消息内容和类型
+    const match = msg.match(/^\[(.*?)\](.*)/)
+    let type = 'info'
+    let content = msg
+
+    if (match) {
+        const [, typeStr, contentStr] = match
+        type = typeStr || 'info'
+        content = contentStr
+    }
+
+    // 显示通知
+    ElNotification({
+        title: '通知',
+        message: content,
+        type: type,
+        duration: 3000,
+        position: 'top-right'
+    })
+}
+
+// 监听路由变化
+watch(
+    () => route.query.msg,
+    (newMsg) => {
+        if (newMsg) {
+            showNotification(newMsg)
+        }
+    },
+    { immediate: true }
+)
+
+// 组件挂载时也检查一次
+onMounted(() => {
+    if (route.query.msg) {
+        showNotification(route.query.msg)
+    }
+})
+</script>

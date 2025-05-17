@@ -1,4 +1,5 @@
 <template>
+  <ShowMsg />
   <WechatButton v-if="!isHideWechatButton"/>
   <SideButton />
   <div class="app-container">
@@ -18,6 +19,7 @@ import WechatButton from './components/PopWechatButton.vue';
 import SideButton from './components/SideButton.vue';
 import PrintInfo from './components/PrintInfo.vue';
 import { useRoute } from 'vue-router'
+import ShowMsg from '@/components/ShowMsg.vue'
 
 // 计算属性判断当前路由是否为 /ltw
 const route = useRoute()

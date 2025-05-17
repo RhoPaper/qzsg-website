@@ -2,15 +2,16 @@
   <section class="education-concept">
     <div class="container">
       <div class="concept-container">
-        <div class="concept-image-container" ref="imageContainer" @mouseenter="pauseAutoPlay"
-          @mouseleave="resumeAutoPlay">
-          <RouterLink v-for="(image, index) in conceptImages" :key="index" :to="{ path: '/courses' }"
-            class="concept-image-wrapper" :class="{ 'active': currentIndex === index }">
-            <img :src="image.url" :alt="image.title" class="concept-image">
-            <div class="concept-image-overlay">
-              <h3 class="concept-image-title">{{ image.title }}</h3>
-            </div>
-          </RouterLink>
+
+        <div class="concept-image-container" ref="imageContainer">
+          <el-carousel :interval="3000" type="" height="20rem" :autoplay="true" indicator-position="" trigger="click"
+            @change="handleCarouselChange">
+            <el-carousel-item v-for="(image, index) in conceptImages" :key="index">
+              <RouterLink :to="{ path: '/courses' }" class="concept-image-wrapper">
+                <img :src="image.url" :alt="image.title" class="concept-image">
+              </RouterLink>
+            </el-carousel-item>
+          </el-carousel>
         </div>
 
         <div class="concept-content" ref="contentContainer">
@@ -56,7 +57,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, onMounted } from 'vue';
 import { RouterLink } from 'vue-router';
 
 const imageContainer = ref(null);
@@ -91,40 +92,16 @@ Promise.all(
 ).then(results => {
   // 过滤掉加载失败的图片，并更新 conceptImages 的值
   conceptImages.value = results.filter(item => item !== null);
-  // 如果需要，可以在这里启动自动轮播，确保图片都加载成功
-  startAutoPlay();
 }).catch(error => {
   console.error("Error during images loading:", error);
 });
 
-const currentIndex = ref(0);
-let autoPlayTimer = null;
-
-// 自动轮播逻辑
-const startAutoPlay = () => {
-  // 确保只有在有图片的情况下才启动轮播
-  if (conceptImages.value.length > 0) {
-    autoPlayTimer = setInterval(() => {
-      currentIndex.value = (currentIndex.value + 1) % conceptImages.value.length;
-    }, 3000);
-  }
-};
-
-const pauseAutoPlay = () => {
-  clearInterval(autoPlayTimer);
-};
-
-const resumeAutoPlay = () => {
-  // 确保只有在有图片且轮播已停止的情况下才恢复
-  if (!autoPlayTimer && conceptImages.value.length > 0) {
-    startAutoPlay();
-  }
+const handleCarouselChange = (index) => {
+  // 可以在这里添加轮播切换时的回调逻辑
+  console.log('Current carousel index:', index);
 };
 
 onMounted(() => {
-  // 初始时不立即启动轮播，等待图片加载完成后再启动
-  // startAutoPlay(); // 这行可以移除或注释掉
-
   // 添加滚动监听，实现滚动触发动画
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -141,10 +118,6 @@ onMounted(() => {
   if (text1.value) observer.observe(text1.value);
   if (text2.value) observer.observe(text2.value);
   if (featuresContainer.value) observer.observe(featuresContainer.value);
-});
-
-onBeforeUnmount(() => {
-  clearInterval(autoPlayTimer);
 });
 </script>
 
@@ -171,8 +144,6 @@ onBeforeUnmount(() => {
 .concept-image-container {
   position: relative;
   width: 100%;
-  height: 20rem;
-  /* 固定高度 */
 }
 
 @media (min-width: 768px) {
@@ -181,20 +152,22 @@ onBeforeUnmount(() => {
   }
 }
 
-.concept-image-wrapper {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
+:deep(.el-carousel) {
   border-radius: 0.5rem;
   overflow: hidden;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
-.concept-image-wrapper.active {
-  opacity: 1;
-  z-index: 1;
+:deep(.el-carousel__item) {
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.concept-image-wrapper {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 
 .concept-image {
@@ -232,8 +205,7 @@ onBeforeUnmount(() => {
   transition: all 0.5s 0.2s;
 }
 
-.concept-image-container.animate .concept-image-title,
-.concept-image-wrapper.active .concept-image-title {
+.concept-image-container.animate .concept-image-title {
   transform: translateY(0);
   opacity: 1;
 }
