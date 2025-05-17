@@ -2,25 +2,33 @@
     <div class="hero-side-buttons">
         <a href="#top">
             <button class="side-button pop-in" style="animation-delay: 0.4s;">
-                <i class="ri-corner-left-up-line"></i>
+                <el-icon>
+                    <ArrowUp />
+                </el-icon>
             </button>
         </a>
 
         <a href="/about">
             <button class="side-button pop-in" style="animation-delay: 0.5s;">
-                <i class="ri-search-line"></i>
+                <el-icon>
+                    <Search />
+                </el-icon>
             </button>
         </a>
 
         <a href="/activities">
             <button class="side-button pop-in" style="animation-delay: 0.6s;">
-                <i class="ri-question-line"></i>
+                <el-icon>
+                    <QuestionFilled />
+                </el-icon>
             </button>
         </a>
 
         <a href="/teachers">
             <button class="side-button pop-in" style="animation-delay: 0.7s;">
-                <i class="ri-refresh-line"></i>
+                <el-icon>
+                    <Refresh />
+                </el-icon>
             </button>
         </a>
     </div>
@@ -59,10 +67,12 @@
         transform: scale(0) rotate(-45deg);
         opacity: 0;
     }
+
     60% {
         transform: scale(1.2) rotate(15deg);
         opacity: 0.8;
     }
+
     100% {
         transform: scale(1) rotate(0deg);
         opacity: 1;

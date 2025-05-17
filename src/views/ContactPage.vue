@@ -9,19 +9,31 @@
               <h2 class="contact-section-title">联系方式</h2>
               <div class="contact-details">
                 <p class="contact-item">
-                  <i class="ri-map-pin-line contact-icon"></i>
+                  <el-icon class="contact-icon">
+                    <Location />
+                  </el-icon>
                   浙江省宁波市鄞州区翔云路100号科贸中心东楼2001
                 </p>
                 <p class="contact-item">
-                  <i class="ri-phone-line contact-icon"></i>
-                  177 0649 7762
+                  <el-icon class="contact-icon">
+                    <Phone />
+                  </el-icon>
+                  <a href="tel:17706497762">
+                    177 0649 7762
+                  </a>
                 </p>
                 <p class="contact-item">
-                  <i class="ri-mail-line contact-icon"></i>
-                  info@qinzishiguang.com
+                  <el-icon class="contact-icon">
+                    <Message />
+                  </el-icon>
+                  <a href="mailto:info@qinzishiguang.com">
+                    info@qinzishiguang.com
+                  </a>
                 </p>
                 <p class="contact-item">
-                  <i class="ri-time-line contact-icon"></i>
+                  <el-icon class="contact-icon">
+                    <Timer />
+                  </el-icon>
                   周一至周日 9:00-18:00
                 </p>
               </div>
@@ -29,13 +41,19 @@
                 <h3 class="contact-social-title">关注我们</h3>
                 <div class="social-links">
                   <a href="#" class="social-link">
-                    <i class="ri-wechat-fill"></i>
+                    <el-icon>
+                      <ChatDotRound />
+                    </el-icon>
                   </a>
                   <a href="#" class="social-link">
-                    <i class="ri-weibo-fill"></i>
+                    <el-icon>
+                      <Share />
+                    </el-icon>
                   </a>
                   <a href="#" class="social-link">
-                    <i class="ri-douyin-fill"></i>
+                    <el-icon>
+                      <VideoPlay />
+                    </el-icon>
                   </a>
                 </div>
               </div>

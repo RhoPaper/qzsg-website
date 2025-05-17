@@ -5,30 +5,48 @@
         <div class="footer-section">
           <h3 class="footer-title">联系我们</h3>
           <p class="footer-contact-item">
-            <i class="ri-map-pin-line"></i>
+            <el-icon>
+              <Location />
+            </el-icon>
             浙江省宁波市鄞州区翔云路100号科贸中心东楼2001
           </p>
           <p class="footer-contact-item">
-            <i class="ri-phone-line"></i>
-            177 0649 7762
+            <el-icon>
+              <Phone />
+            </el-icon>
+            <a href="tel:17706497762">
+              177 0649 7762
+            </a>
           </p>
           <p class="footer-contact-item">
-            <i class="ri-mail-line"></i>
-            info@qinzishiguang.com
+            <el-icon>
+              <Message />
+            </el-icon>
+            <a href="mailto:info@qinzishiguang.com">
+              info@qinzishiguang.com
+            </a>
           </p>
           <p class="footer-contact-item">
-            <i class="ri-time-line"></i>
+            <el-icon>
+              <Timer />
+            </el-icon>
             周一至周日 9:00-18:00
           </p>
           <div class="footer-social">
             <a href="#" class="social-link">
-              <i class="ri-wechat-fill"></i>
+              <el-icon>
+                <ChatDotRound />
+              </el-icon>
             </a>
             <a href="#" class="social-link">
-              <i class="ri-weibo-fill"></i>
+              <el-icon>
+                <Share />
+              </el-icon>
             </a>
             <a href="#" class="social-link">
-              <i class="ri-douyin-fill"></i>
+              <el-icon>
+                <VideoPlay />
+              </el-icon>
             </a>
           </div>
         </div>
@@ -57,7 +75,9 @@
             <p class="qrcode-text">扫描二维码，获取更多教育资讯和活动信息</p>
             <div class="qrcode">
               <div class="qrcode-placeholder">
-                <i class="ri-qr-code-line"></i>
+                <el-icon>
+                  <Crop />
+                </el-icon>
               </div>
             </div>
             <button class="qrcode-button">立即关注</button>
@@ -76,13 +96,18 @@
 
 <script setup>
 import { ref } from 'vue';
+import { ElMessageBox } from 'element-plus';
 
 const message = ref('');
 
 const submitMessage = () => {
   if (message.value.trim()) {
-    alert('感谢您的留言，我们会尽快回复！');
-    message.value = '';
+    ElMessageBox.alert('感谢您的留言，我们会尽快回复！', '提示', {
+      confirmButtonText: '确定',
+      callback: () => {
+        message.value = '';
+      }
+    });
   }
 };
 </script>

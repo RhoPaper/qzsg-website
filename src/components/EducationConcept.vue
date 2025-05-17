@@ -27,25 +27,33 @@
           <div class="concept-features" ref="featuresContainer">
             <div class="feature bounce-in" style="animation-delay: 0.1s;">
               <div class="feature-icon feature-icon-red">
-                <i class="ri-government-line"></i>
+                <el-icon>
+                  <OfficeBuilding />
+                </el-icon>
               </div>
               <span class="feature-text">法治教育体系</span>
             </div>
             <div class="feature bounce-in" style="animation-delay: 0.2s;">
               <div class="feature-icon feature-icon-yellow">
-                <i class="ri-shield-check-line"></i>
+                <el-icon>
+                  <Check />
+                </el-icon>
               </div>
               <span class="feature-text">安全创新教育</span>
             </div>
             <div class="feature bounce-in" style="animation-delay: 0.3s;">
               <div class="feature-icon feature-icon-green">
-                <i class="ri-book-open-line"></i>
+                <el-icon>
+                  <Reading />
+                </el-icon>
               </div>
               <span class="feature-text">体验式学习模式</span>
             </div>
             <div class="feature bounce-in" style="animation-delay: 0.4s;">
               <div class="feature-icon feature-icon-blue">
-                <i class="ri-group-line"></i>
+                <el-icon>
+                  <User />
+                </el-icon>
               </div>
               <span class="feature-text">自主活动乐园</span>
             </div>

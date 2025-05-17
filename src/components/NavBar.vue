@@ -3,12 +3,7 @@
     <div class="container header-container">
       <div class="header-left">
         <router-link to="/" class="logo">
-          <img 
-            src="../assets/static/image/qzsg.avif"
-            width="180" 
-            height="60"
-            alt="亲子拾光"
-          >
+          <img src="../assets/static/image/qzsg.avif" width="180" height="60" alt="亲子拾光">
         </router-link>
         <nav class="desktop-nav">
           <router-link to="/" class="nav-link">首页</router-link>
@@ -23,22 +18,28 @@
         <a href="tel:17706497762" v-if="!isMobile">
           <div class="phone-container">
             <div class="phone-icon">
-              <i class="ri-phone-line"></i>
+              <el-icon>
+                <Phone />
+              </el-icon>
             </div>
             <span>177 0649 7762</span>
           </div>
         </a>
-        
+
         <a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzIwOTQ1NzkxNw==" target="_blank">
           <button class="wechat-button" v-if="!isMobile">
-            <i class="ri-wechat-line"></i>
+            <el-icon>
+              <ChatDotRound />
+            </el-icon>
           </button>
         </a>
         <a href="tel:17706497762">
           <button class="mobile-icon-button" v-if="isMobile">
-              <i class="ri-phone-line"></i> <!-- 替换为移动端需要显示的图标 -->
-        </button>
-      </a>
+            <el-icon>
+              <Phone />
+            </el-icon> <!-- 替换为移动端需要显示的图标 -->
+          </button>
+        </a>
         <button @click="toggleMobileMenu" class="menu-button" :class="{ 'is-active': mobileMenuOpen }">
           <span class="menu-bar"></span>
           <span class="menu-bar"></span>
@@ -122,8 +123,10 @@ onBeforeUnmount(() => {
 
 .logo {
   display: inline-block;
-  width: clamp(120px, 15vw, 180px); /* 自适应宽度 */
-  height: clamp(40px, 5vw, 60px);   /* 自适应高度 */
+  width: clamp(120px, 15vw, 180px);
+  /* 自适应宽度 */
+  height: clamp(40px, 5vw, 60px);
+  /* 自适应高度 */
   margin-right: 2.5rem;
   position: relative;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -133,7 +136,8 @@ onBeforeUnmount(() => {
 .logo img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* 确保图片完整显示 */
+  object-fit: contain;
+  /* 确保图片完整显示 */
   filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.1));
   transition: inherit;
 }
@@ -143,7 +147,7 @@ onBeforeUnmount(() => {
   .logo:hover {
     transform: scale(1.05);
   }
-  
+
   .logo:hover img {
     opacity: 0.9;
     filter: drop-shadow(0 4px 8px rgba(255, 255, 255, 0.2));
@@ -233,7 +237,8 @@ onBeforeUnmount(() => {
   margin-right: 0.5rem;
 }
 
-.wechat-button, .mobile-icon-button {
+.wechat-button,
+.mobile-icon-button {
   width: 2rem;
   height: 2rem;
   background-color: var(--secondary);
@@ -337,10 +342,27 @@ onBeforeUnmount(() => {
   transition-delay: calc(0.1s * var(--i, 0));
 }
 
-.mobile-menu.is-open .nav-link:nth-child(1) { --i: 1; }
-.mobile-menu.is-open .nav-link:nth-child(2) { --i: 2; }
-.mobile-menu.is-open .nav-link:nth-child(3) { --i: 3; }
-.mobile-menu.is-open .nav-link:nth-child(4) { --i: 4; }
-.mobile-menu.is-open .nav-link:nth-child(5) { --i: 5; }
-.mobile-menu.is-open .nav-link:nth-child(6) { --i: 6; }
+.mobile-menu.is-open .nav-link:nth-child(1) {
+  --i: 1;
+}
+
+.mobile-menu.is-open .nav-link:nth-child(2) {
+  --i: 2;
+}
+
+.mobile-menu.is-open .nav-link:nth-child(3) {
+  --i: 3;
+}
+
+.mobile-menu.is-open .nav-link:nth-child(4) {
+  --i: 4;
+}
+
+.mobile-menu.is-open .nav-link:nth-child(5) {
+  --i: 5;
+}
+
+.mobile-menu.is-open .nav-link:nth-child(6) {
+  --i: 6;
+}
 </style>
