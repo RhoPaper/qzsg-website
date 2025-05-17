@@ -1,11 +1,9 @@
 <template>
-  <main>
-    <HeroSection />
-    <EducationConcept />
-    <SchoolProfile />
-    <TeacherTeam />
-    <LatestCourses />
-  </main>
+  <HeroSection />
+  <EducationConcept />
+  <SchoolProfile />
+  <TeacherTeam />
+  <LatestCourses />
 </template>
 
 <script setup>

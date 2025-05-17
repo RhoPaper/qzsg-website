@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomePage from '@/views/HomePage.vue';
-import AboutPage from '@/views/AboutPage.vue';
-import TeachersPage from '@/views/TeachersPage.vue';
-import CoursesPage from '@/views/CoursesPage.vue';
-import ActivitiesPage from '@/views/ActivitiesPage.vue';
-import ContactPage from '@/views/ContactPage.vue';
-import LTW from '@/views/LinkToWechatPage.vue';
+import HomePage from '../views/HomePage.vue';
+import AboutPage from '../views/AboutPage.vue';
+import TeachersPage from '../views/TeachersPage.vue';
+import CoursesPage from '../views/CoursesPage.vue';
+import ActivitiesPage from '../views/ActivitiesPage.vue';
+import ContactPage from '../views/ContactPage.vue';
+import LTW from '../views/LinkToWechatPage.vue';
 
 const routes = [
   {
