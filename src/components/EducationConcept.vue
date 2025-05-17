@@ -18,11 +18,11 @@
             <h2 class="section-title">教育理念 / Concept</h2>
           </div>
           <p class="concept-text fade-in-up" ref="text1">
-            拾光研学原创的户外教育“六商课程”，
-            由北大、北师大、华师大、杭二中等知名院校专家、国家户外资格教师与拾光研学儿童户外体验教育团队共同研发，秉承“户外即学校、玩乐即课堂”的理念，通过对德商、逆商、情商、体商、财商、美商六大系列的深刻研究和精准阐释，有针对性的将户外体验活动结合传统文化、科学创新、自然探索、职业体验等十大元素精心开发成课程。
+            拾光研学原创的户外教育"六商课程"，
+            由北大、北师大、华师大、杭二中等知名院校专家、国家户外资格教师与拾光研学儿童户外体验教育团队共同研发，秉承"户外即学校、玩乐即课堂"的理念，通过对德商、逆商、情商、体商、财商、美商六大系列的深刻研究和精准阐释，有针对性的将户外体验活动结合传统文化、科学创新、自然探索、职业体验等十大元素精心开发成课程。
           </p>
           <p class="concept-text fade-in-up" ref="text2">
-            再结合孩子爱玩的天性，设置主题任务与游戏，通过“场景”、“体验”、“引导”、“跟踪”的教育模式将孩子带入课程活动中，并以亲身体验的方式学到知识和技能。</p>
+            再结合孩子爱玩的天性，设置主题任务与游戏，通过"场景"、"体验"、"引导"、"跟踪"的教育模式将孩子带入课程活动中，并以亲身体验的方式学到知识和技能。</p>
           <div class="concept-features" ref="featuresContainer">
             <div class="feature bounce-in" style="animation-delay: 0.1s;">
               <div class="feature-icon feature-icon-red">
@@ -66,42 +66,48 @@ const text2 = ref(null);
 const featuresContainer = ref(null);
 
 // 定义图片路径和对应标题的映射关系
-// 这里的 key 是图片相对于 glob 模式路径的相对路径
 const imageMap = {
   '../assets/static/image/concept-img1.avif': '美杜莎行动',
   '../assets/static/image/concept-img2.avif': '海上丝路',
-  // 如果您有更多图片，请按照 './../assets/static/image/文件名.avif': '标题' 的格式在这里添加
+  // 如果您有更多图片，请按照 '相对于当前文件的路径': '标题' 的格式在这里添加
 };
 
-// 使用 import.meta.globEager 一次性导入所有指定的图片
-// 导入的结果是一个对象，key 是文件路径，value 是导入的模块 (通常其 default 属性是 URL)
-// './../assets/static/image/*.avif' 表示相对于当前文件 EducationConcept.vue 找到图片目录下的所有 .avif 文件
-const importedImages = import.meta.globEager('../assets/static/image/*.avif');
-
-// 根据 imageMap 和 importedImages 构建 conceptImages 数组
 const conceptImages = ref([]);
 
-for (const imagePath in imageMap) {
-  if (importedImages[imagePath] && importedImages[imagePath].default) {
-    // importedImages[imagePath].default 包含了图片的公共 URL
-    conceptImages.value.push({
-      url: importedImages[imagePath].default,
-      title: imageMap[imagePath],
-    });
-  } else {
-    console.warn(`Warning: Image not found or could not be imported at ${imagePath}`);
-    // 可以在这里添加一个默认图片或跳过
-  }
-}
+// 使用 Promise.all 和动态 import 来并行加载图片 URL
+Promise.all(
+  Object.entries(imageMap).map(([imagePath, title]) => {
+    // 使用动态 import() 来加载图片，Vite 会处理并返回 URL
+    return import(/* @vite-ignore */ imagePath)
+      .then(module => ({ // 成功加载
+        url: module.default, // 图片的 URL 通常在 .default 属性
+        title: title
+      }))
+      .catch(error => { // 加载失败
+        console.error(`Error loading image at ${imagePath}:`, error);
+        return null; // 加载失败则返回 null 或一个默认值
+      });
+  })
+).then(results => {
+  // 过滤掉加载失败的图片，并更新 conceptImages 的值
+  conceptImages.value = results.filter(item => item !== null);
+  // 如果需要，可以在这里启动自动轮播，确保图片都加载成功
+  startAutoPlay();
+}).catch(error => {
+  console.error("Error during images loading:", error);
+});
 
 const currentIndex = ref(0);
 let autoPlayTimer = null;
 
 // 自动轮播逻辑
 const startAutoPlay = () => {
-  autoPlayTimer = setInterval(() => {
-    currentIndex.value = (currentIndex.value + 1) % conceptImages.value.length;
-  }, 3000);
+  // 确保只有在有图片的情况下才启动轮播
+  if (conceptImages.value.length > 0) {
+    autoPlayTimer = setInterval(() => {
+      currentIndex.value = (currentIndex.value + 1) % conceptImages.value.length;
+    }, 3000);
+  }
 };
 
 const pauseAutoPlay = () => {
@@ -109,10 +115,16 @@ const pauseAutoPlay = () => {
 };
 
 const resumeAutoPlay = () => {
-  startAutoPlay();
+  // 确保只有在有图片且轮播已停止的情况下才恢复
+  if (!autoPlayTimer && conceptImages.value.length > 0) {
+    startAutoPlay();
+  }
 };
 
 onMounted(() => {
+  // 初始时不立即启动轮播，等待图片加载完成后再启动
+  // startAutoPlay(); // 这行可以移除或注释掉
+
   // 添加滚动监听，实现滚动触发动画
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
