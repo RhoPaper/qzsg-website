@@ -10,8 +10,8 @@ import PostPage from '../views/PostPage.vue';
 
 // 自定义标题映射表（只包含需要自定义的页面）
 const customTitles = {
-  '/': '亲子拾光',
-  '/ltw': '关注微信公众号'
+  '/': '亲子拾光-专业亲子研学连锁机构',
+  '/ltw': '关注亲子拾光微信公众号'
 };
 
 const routes = [
