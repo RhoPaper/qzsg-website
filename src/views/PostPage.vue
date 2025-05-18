@@ -109,6 +109,8 @@ onMounted(async () => {
                     post.value.title = titleMatch[1].trim();
                     post.value.date = dateMatch[1].trim();
                     post.value.content = marked(content);
+                    // 更新页面标题，直接使用文章标题
+                    document.title = post.value.title;
                     console.log('Post loaded:', post.value);
                 }
             }
