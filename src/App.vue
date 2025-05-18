@@ -1,13 +1,16 @@
 <template>
   <ShowMsg />
-  <WechatButton v-if="!isHideWechatButton"/>
-  <SideButton />
+  <WechatButton v-if="!isHideWechatButton" />
+  <!-- <SideButton /> -->
   <div class="app-container">
     <NavBar />
-    <router-view />
+    <transition name="fade" mode="out-in">
+      <router-view />
+    </transition>
     <FooterSection />
   </div>
   <PrintInfo />
+  <el-backtop :right="40" :bottom="70" :visibility-height="100" />
 </template>
 
 <script setup>
@@ -16,10 +19,11 @@ import NavBar from './components/NavBar.vue';
 import FooterSection from './components/FooterSection.vue';
 import Clarity from '@microsoft/clarity';
 import WechatButton from './components/PopWechatButton.vue';
-import SideButton from './components/SideButton.vue';
+// import SideButton from './components/SideButton.vue';
 import PrintInfo from './components/PrintInfo.vue';
 import { useRoute } from 'vue-router'
 import ShowMsg from '@/components/ShowMsg.vue'
+import { ElBacktop } from 'element-plus'
 
 // 计算属性判断当前路由是否为 /ltw
 const route = useRoute()
@@ -32,11 +36,15 @@ Clarity.init(projectId);
 
 <style>
 /* 全局样式 */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@500&display=swap'); /* 导入500weight字体 */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap'); /* 导入400weight字体 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@500&display=swap');
+/* 导入500weight字体 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap');
+/* 导入400weight字体 */
 /* @import url('https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css'); */
 
-:where([class^="ri-"])::before { content: "\f3c2"; }
+:where([class^="ri-"])::before {
+  content: "\f3c2";
+}
 
 * {
   margin: 0;
@@ -97,6 +105,7 @@ button {
 ::-webkit-scrollbar {
   width: 0 !important;
 }
+
 ::-webkit-scrollbar {
   width: 0 !important;
   height: 0;
@@ -122,5 +131,38 @@ button {
   --yellow-500: #eab308;
   --green-500: #22c55e;
   --blue-500: #3b82f6;
+}
+
+/* 自定义 Backtop 样式 */
+:deep(.el-backtop) {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+:deep(.el-backtop:hover) {
+  background-color: var(--primary);
+}
+
+/* 页面切换动画 */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease-in;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
 }
 </style>

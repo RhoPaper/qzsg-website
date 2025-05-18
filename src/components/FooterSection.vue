@@ -60,6 +60,7 @@
             <li><router-link to="/teachers" class="footer-link">师资团队</router-link></li>
             <li><router-link to="/contact" class="footer-link">联系我们</router-link></li>
           </ul>
+
           <div class="footer-form">
             <form @submit.prevent="submitMessage">
               <div class="form-group">
@@ -86,8 +87,20 @@
       </div>
       <div class="footer-bottom">
         <div class="footer-copyright">
-          <p>© {{ new Date().getFullYear() }} 亲子拾光. 保留所有权利.</p>
-          <p>京ICP备123456789号 | 京公网安备11010802030294号</p>
+          <p>©2024 - {{ new Date().getFullYear() }} 拾光研学旅行社（宁波）有限公司 保留所有权利.</p>
+        </div>
+        <div class="powered-by">
+          <p>Powered By <a href="https://rhopaper.top/about" about="_blank">RhoPaper</a></p>
+        </div>
+        <br/>
+        <div class="footer-beian">
+          <a target="_blank" href="https://beian.miit.gov.cn">
+            <span>浙ICP备2022004790号-1 | </span>
+          </a>
+          <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33020902000466">
+            <img src="../assets/static/image/ga-icon.png" alt="浙公网安备33020902000466号" style="width: 18px; height: 18px;" />
+            <span>浙公网安备33020902000466号</span>
+          </a>
         </div>
       </div>
     </div>
@@ -178,6 +191,7 @@ const submitMessage = () => {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin-left: 4%
 }
 
 .footer-link {
@@ -276,6 +290,7 @@ const submitMessage = () => {
 .footer-bottom {
   border-top: 1px solid var(--gray-800);
   margin-top: 2rem;
+  margin-bottom: 0.5rem;
   padding-top: 1.5rem;
   font-size: 0.875rem;
   color: var(--gray-400);
@@ -287,10 +302,29 @@ const submitMessage = () => {
   align-items: center;
 }
 
+.powered-by {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.powered-by a {
+  color: #42b883;
+}
+
 @media (min-width: 768px) {
   .footer-copyright {
     flex-direction: row;
     justify-content: space-between;
   }
+  .powered-by {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
+
+.footer-beian {
+  text-align: center;
+}
+
 </style>

@@ -67,7 +67,7 @@ export default {
             clearTimeout(this.timer);
           }
         });
-      }, 4000);
+      }, 4500);
     }
   }
 }

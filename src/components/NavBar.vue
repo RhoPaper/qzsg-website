@@ -26,13 +26,13 @@
           </div>
         </a>
 
-        <a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzIwOTQ1NzkxNw==" target="_blank">
+        <RouterLink to="/ltw">
           <button class="wechat-button" v-if="!isMobile">
             <el-icon>
               <ChatDotRound />
             </el-icon>
           </button>
-        </a>
+        </RouterLink>
         <a href="tel:17706497762">
           <button class="mobile-icon-button" v-if="isMobile">
             <el-icon>
@@ -65,6 +65,7 @@
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { RouterLink } from 'vue-router';
 
 const mobileMenuOpen = ref(false);
 const isMobile = ref(false); // 新增响应式变量

@@ -2,6 +2,11 @@
     <main class="page-container">
         <div class="container">
             <article class="post-content markdown-body">
+                <el-breadcrumb separator-icon="ArrowRight" class="post-breadcrumb">
+                    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                    <el-breadcrumb-item :to="{ path: '/courses' }">课程中心</el-breadcrumb-item>
+                    <el-breadcrumb-item>{{ post.title }}</el-breadcrumb-item>
+                </el-breadcrumb>
                 <h1 class="post-title">{{ post.title }}</h1>
                 <div class="post-meta">
                     <time :datetime="post.date">{{ formatDate(post.date) }}</time>
@@ -19,6 +24,8 @@ import { marked } from 'marked';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
 import 'github-markdown-css/github-markdown.css';
+import { ElBreadcrumb, ElBreadcrumbItem } from 'element-plus';
+import { ArrowRight } from '@element-plus/icons-vue'
 
 // 配置 marked 使用 highlight.js
 marked.setOptions({
@@ -206,5 +213,34 @@ onMounted(async () => {
 
 .markdown-body table tr:nth-child(2n) {
     background-color: #f6f8fa;
+}
+
+/* "面包屑"样式 */
+.post-breadcrumb {
+    margin-bottom: 1.5rem;
+    padding: 0.5rem 0;
+}
+
+:deep(.el-breadcrumb__item) {
+    font-size: 0.9rem;
+}
+
+:deep(.el-breadcrumb__inner) {
+    color: var(--gray-600);
+    font-weight: normal;
+}
+
+:deep(.el-breadcrumb__inner.is-link:hover) {
+    color: var(--primary);
+}
+
+:deep(.el-breadcrumb__separator) {
+    color: var(--gray-400);
+    display: flex;
+    align-items: center;
+}
+
+:deep(.el-breadcrumb__separator .el-icon) {
+    font-size: 0.9rem;
 }
 </style>
