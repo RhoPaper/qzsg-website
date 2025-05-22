@@ -90,7 +90,7 @@
           <p>©2024 - {{ new Date().getFullYear() }} 拾光研学旅行社（宁波）有限公司 保留所有权利.</p>
         </div>
         <div class="powered-by">
-          <p>Powered By <a href="https://rhopaper.top/about" about="_blank">RhoPaper</a></p>
+          <p>Powered By <a href="https://rhopaper.top/about" target="_blank">RhoPaper</a></p>
         </div>
         <br/>
         <div class="footer-beian">
