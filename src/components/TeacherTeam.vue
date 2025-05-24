@@ -46,40 +46,16 @@ import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 const teachers = [
   {
-    name: '张教授',
-    title: '教育学博士，儿童心理学专家',
-    description: '从事儿童教育研究20余年，发表学术论文30余篇，著有《儿童心理发展与教育》等多部专著，曾获国家级教学成果奖。',
-    image: 'https://public.readdy.ai/ai/img_res/0d6883ddd95485ab49e3f847f88561d8.jpg'
+    name: '老K',
+    title: '深耕体验教育·赋能成长探索',
+    description: '管理学学士、文学学士、原江西外语外贸学院管理学院教师、浙江万里学院校外导师、10年日企管理经验、人杜部研学旅行指导证、中国登山协会户外指导员、中国营地教育联盟认证营长、国家体验式培训师、“爱丁堡公爵奖励”青少年导师、Kailas领攀教练班成员',
+    image: 'src/assets/static/image/lao-K.png'
   },
   {
-    name: '林老师',
-    title: '语言表达与沟通能力培训专家',
-    description: '毕业于北京师范大学，拥有10年少儿语言教学经验，善于通过游戏和互动激发孩子的语言表达能力和创造力。',
-    image: 'https://public.readdy.ai/ai/img_res/45b8445fc98d19fbdc9be7f568fbab62.jpg'
-  },
-  {
-    name: '王老师',
-    title: 'STEM教育与逻辑思维培训专家',
-    description: '理工科背景，曾在国际知名教育机构任职，擅长通过实验和项目式学习培养孩子的逻辑思维和动手能力。',
-    image: 'https://public.readdy.ai/ai/img_res/dd09bffe3fa8214bd0a6f87be8803acb.jpg'
-  },
-  {
-    name: '陈老师',
-    title: '艺术创意与美育教育专家',
-    description: '毕业于中央美术学院，擅长通过多种艺术形式激发孩子的创造力和审美能力，让每个孩子都能找到表达自我的方式。',
-    image: 'https://public.readdy.ai/ai/img_res/9d1b32fd18b39d3a4d043342efef2edb.jpg'
-  },
-  {
-    name: '刘老师',
-    title: '体能发展与健康教育专家',
-    description: '体育教育背景，曾担任青少年体育教练，注重培养孩子的身体协调能力、团队合作精神和健康生活习惯。',
-    image: 'https://public.readdy.ai/ai/img_res/01b0389407c7c713b4b02bd3450ad284.jpg'
-  },
-  {
-    name: '赵老师',
-    title: '情商教育与社交能力培训专家',
-    description: '心理学背景，专注于儿童情绪管理和社交能力培养，通过角色扮演和团队活动帮助孩子建立健康的人际关系。',
-    image: 'https://public.readdy.ai/ai/img_res/2bf2061c61628face3a4b2bd52f733c0.jpg'
+    name: 'Summer（夏天）',
+    title: '跨界育行·自然疗愈',
+    description: '自媒体人、“亲子拾光”品牌创始人、日本自然教育指导师、荷兰PSBK儿童社会心理游戏理疗师，国家体验式培训师、北E区户外运动协会副会长，中国红十字放护员、网红育儿达人，带儿子游历18个国家和中国20多个省份、深刻理解亲子旅行中的教育意义',
+    image: 'src/assets/static/image/summer.png'
   }
 ];
 
