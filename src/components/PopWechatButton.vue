@@ -22,20 +22,27 @@ const OpenWechat = () => {
 <style scoped>
 .follow-wechat {
     position: fixed;
-    top: 12.5%; /* 可根据需要调整与顶部的距离 */
+    top: 9%; /* 可根据需要调整与顶部的距离 */
     left: 50%;
     transform: translateX(-50%);
-    z-index: 9999;
+    z-index: 99999;
     display: flex;
     align-items: center;
-    gap: 3px;
-    padding: 0 10px;
+    gap: 4px;
+    padding: 0 9px;
     background-color: #34CF95;
-    height: 38px;
+    height: 33px;
     border: none;
-    border-radius: 19px;
+    border-radius: 16.5px;
     text-decoration: none;
     cursor: pointer;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.25);
+    transition: background-color 0.3s ease;
+}
+
+.follow-wechat:hover {
+    background-color: #2ab884;
+
 }
 
 .follow-wechat a {
