@@ -49,13 +49,13 @@ const teachers = [
     name: '老K',
     title: '深耕体验教育·赋能成长探索',
     description: '管理学学士、文学学士、原江西外语外贸学院管理学院教师、浙江万里学院校外导师、10年日企管理经验、人杜部研学旅行指导证、中国登山协会户外指导员、中国营地教育联盟认证营长、国家体验式培训师、“爱丁堡公爵奖励”青少年导师、Kailas领攀教练班成员',
-    image: 'src/assets/static/image/lao-K.png'
+    image: '/assets/static/image/lao-K.png'
   },
   {
     name: 'Summer（夏天）',
     title: '跨界育行·自然疗愈',
     description: '自媒体人、“亲子拾光”品牌创始人、日本自然教育指导师、荷兰PSBK儿童社会心理游戏理疗师，国家体验式培训师、北E区户外运动协会副会长，中国红十字放护员、网红育儿达人，带儿子游历18个国家和中国20多个省份、深刻理解亲子旅行中的教育意义',
-    image: 'src/assets/static/image/summer.png'
+    image: '/assets/static/image/summer.png'
   }
 ];
 
