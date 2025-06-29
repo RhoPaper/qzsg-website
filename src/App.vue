@@ -48,7 +48,7 @@ const scrollToTop = () => {
 onMounted(() => {
   // 监听滚动事件
   window.addEventListener('scroll', handleScroll)
-  
+
   // 延迟加载 Microsoft Clarity 分析组件
   setTimeout(() => {
     import('@microsoft/clarity').then(({ default: Clarity }) => {
