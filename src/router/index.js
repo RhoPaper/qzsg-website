@@ -1,12 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomePage from '../views/HomePage.vue';
-import AboutPage from '../views/AboutPage.vue';
-import TeachersPage from '../views/TeachersPage.vue';
-import CoursesPage from '../views/CoursesPage.vue';
-import ActivitiesPage from '../views/ActivitiesPage.vue';
-import ContactPage from '../views/ContactPage.vue';
-import LTW from '../views/LinkToWechatPage.vue';
-import PostPage from '../views/PostPage.vue';
+
+// 使用动态导入实现懒加载
+const HomePage = () => import('../views/HomePage.vue');
+const AboutPage = () => import('../views/AboutPage.vue');
+const TeachersPage = () => import('../views/TeachersPage.vue');
+const CoursesPage = () => import('../views/CoursesPage.vue');
+const ActivitiesPage = () => import('../views/ActivitiesPage.vue');
+const ContactPage = () => import('../views/ContactPage.vue');
+const LTW = () => import('../views/LinkToWechatPage.vue');
+const PostPage = () => import('../views/PostPage.vue');
 
 // 自定义标题映射表（只包含需要自定义的页面）
 const customTitles = {

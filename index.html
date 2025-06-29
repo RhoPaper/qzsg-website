@@ -1,13 +1,118 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8">
     <link rel="icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="亲子拾光-专业亲子研学连锁机构，致力于为家庭提供优质的亲子教育体验">
+    <meta name="keywords" content="亲子教育,研学,亲子活动,教育机构">
+    <meta name="author" content="亲子拾光">
+    
+    <!-- 性能优化 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
+    <!-- DNS预解析 -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    
+    <!-- 预连接关键域名 -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    
+    <!-- 预加载关键字体 -->
+    <link rel="preload" href="https://fonts.gstatic.com/s/notosanssc/v36/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.119.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <!-- 预加载关键CSS -->
+    <link rel="preload" href="/src/assets/main.css" as="style">
+    
+    <!-- 预加载关键图片 -->
+    <link rel="preload" href="/src/assets/static/image/qzsg-logo.avif" as="image" type="image/avif">
+    
     <title>亲子拾光-专业亲子研学连锁机构</title>
+    
+    <!-- 内联关键CSS -->
+    <style>
+      /* 关键渲染路径CSS */
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background-color: #f9fafb;
+        color: #333;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      
+      #app {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      /* 加载动画 */
+      .loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #f9fafb;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+      
+      .loading::after {
+        content: '';
+        width: 40px;
+        height: 40px;
+        border: 3px solid #e5e7eb;
+        border-top: 3px solid #0B8B9B;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
   </head>
   <body>
+    <!-- 加载动画 -->
+    <div id="loading" class="loading"></div>
+    
     <div id="app"></div>
+    
     <script type="module" src="/src/main.js"></script>
+    
+    <!-- 移除加载动画 -->
+    <script>
+      window.addEventListener('load', function() {
+        const loading = document.getElementById('loading');
+        if (loading) {
+          loading.style.opacity = '0';
+          setTimeout(() => {
+            loading.remove();
+          }, 300);
+        }
+      });
+      
+      // 如果5秒后还没加载完成，也移除加载动画
+      setTimeout(() => {
+        const loading = document.getElementById('loading');
+        if (loading) {
+          loading.style.opacity = '0';
+          setTimeout(() => {
+            loading.remove();
+          }, 300);
+        }
+      }, 5000);
+    </script>
   </body>
 </html>

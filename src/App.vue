@@ -10,37 +10,80 @@
     <FooterSection />
   </div>
   <PrintInfo />
-  <el-backtop :right="40" :bottom="70" :visibility-height="100" />
+  <!-- 替换Element Plus的Backtop为自定义组件 -->
+  <div v-if="showBackTop" class="back-to-top" @click="scrollToTop">
+    <ArrowUp />
+  </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import NavBar from './components/NavBar.vue';
 import FooterSection from './components/FooterSection.vue';
-import Clarity from '@microsoft/clarity';
 import WechatButton from './components/PopWechatButton.vue';
 // import SideButton from './components/SideButton.vue';
 import PrintInfo from './components/PrintInfo.vue';
 import { useRoute } from 'vue-router'
 import ShowMsg from '@/components/ShowMsg.vue'
-import { ElBacktop } from 'element-plus'
+import { ArrowUp } from '@element-plus/icons-vue'
 
 // 计算属性判断当前路由是否为 /ltw
 const route = useRoute()
 const isHideWechatButton = computed(() => route.path === '/ltw')
 
-// 加载 Microsoft Clarity 分析组件
-const projectId = "r6t8kssmg9"
-Clarity.init(projectId);
+// 返回顶部功能
+const showBackTop = ref(false)
+
+const handleScroll = () => {
+  showBackTop.value = window.pageYOffset > 100
+}
+
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
+}
+
+onMounted(() => {
+  // 监听滚动事件
+  window.addEventListener('scroll', handleScroll)
+  
+  // 延迟加载 Microsoft Clarity 分析组件
+  setTimeout(() => {
+    import('@microsoft/clarity').then(({ default: Clarity }) => {
+      const projectId = "r6t8kssmg9"
+      Clarity.init(projectId);
+    }).catch(err => {
+      console.warn('Failed to load Clarity:', err);
+    });
+  }, 2000); // 延迟2秒加载
+});
 </script>
 
 <style>
-/* 全局样式 */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@500&display=swap');
-/* 导入500weight字体 */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap');
-/* 导入400weight字体 */
-/* @import url('https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css'); */
+/* 字体预加载优化 */
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/notosanssc/v36/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.119.woff2') format('woff2');
+  unicode-range: U+4e00-9fff, U+3400-4dbf, U+20000-2a6df, U+2a700-2b73f, U+2b740-2b81f, U+2b820-2ceaf, U+f900-faff, U+3300-33ff, U+fe30-fe4f, U+ff00-ffef;
+}
+
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/notosanssc/v36/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.119.woff2') format('woff2');
+  unicode-range: U+4e00-9fff, U+3400-4dbf, U+20000-2a6df, U+2a700-2b73f, U+2b740-2b81f, U+2b820-2ceaf, U+f900-faff, U+3300-33ff, U+fe30-fe4f, U+ff00-ffef;
+}
+
+/* 移除外部字体引用，使用本地字体 */
+/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@500&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap'); */
 
 :where([class^="ri-"])::before {
   content: "\f3c2";
@@ -53,10 +96,15 @@ Clarity.init(projectId);
 }
 
 body {
-  font-family: 'Noto Sans SC', sans-serif;
+  font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background-color: #f9fafb;
   color: #333;
   line-height: 1.5;
+  /* 启用字体平滑 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* 优化文字渲染 */
+  text-rendering: optimizeLegibility;
 }
 
 .container {
@@ -133,8 +181,11 @@ button {
   --blue-500: #3b82f6;
 }
 
-/* 自定义 Backtop 样式 */
-:deep(.el-backtop) {
+/* 自定义返回顶部按钮 */
+.back-to-top {
+  position: fixed;
+  right: 40px;
+  bottom: 70px;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -144,10 +195,24 @@ button {
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
 }
 
-:deep(.el-backtop:hover) {
+.back-to-top:hover {
   background-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.15);
+}
+
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 /* 页面切换动画 */
@@ -164,5 +229,21 @@ button {
 .fade-enter-to,
 .fade-leave-from {
   opacity: 1;
+}
+
+/* 图片懒加载优化 */
+img {
+  max-width: 100%;
+  height: auto;
+  /* 启用图片优化 */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* 预加载关键资源 */
+@media (preload) {
+  .critical-image {
+    display: block;
+  }
 }
 </style>
